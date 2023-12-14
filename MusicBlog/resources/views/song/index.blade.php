@@ -60,7 +60,15 @@
                                             </td>
 											<td>{{ $song->gender->nombre }}</td>
 											<td>{{ $song->anio }}</td>
-											<td>{{ $song->caratula }}</td>
+											<td>
+
+                                            @if(isset($song->caratula))
+                                                <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$song->caratula }}" width="100" alt="">
+                                            @else
+                                                <img class="img-thumbnail img-fluid" src="https://dbdzm869oupei.cloudfront.net/img/vinylrugs/preview/18784.png" alt="" width="100">
+                                            @endif
+
+                                            </td>
 
                                             <td>
                                                 <form action="{{ route('songs.destroy',$song->id) }}" method="POST">

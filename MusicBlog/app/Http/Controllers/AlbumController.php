@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\Singer;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 /**
@@ -47,8 +48,12 @@ class AlbumController extends Controller
     {
         request()->validate(Album::$rules);
 
-        $album = Album::create($request->all());
-
+        //$album = Album::create($request->all());
+        $album = request()->except('_token');
+        if($request->hasFile('caratula')){
+            $album['caratula']=$request->file('caratula')->store('uploads','public');
+        }
+        Album::insert($album);
         return redirect()->route('albums.index')
             ->with('success', 'Album created successfully.');
     }
@@ -76,6 +81,7 @@ class AlbumController extends Controller
     {
         $album = Album::find($id);
         $artistas = Singer::pluck('nombre','id');
+        
         return view('album.edit', compact('album','artistas'));
     }
 
@@ -86,14 +92,20 @@ class AlbumController extends Controller
      * @param  Album $album
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Album $album)
+    public function update(Request $request, $id)
     {
-        request()->validate(Album::$rules);
 
-        $album->update($request->all());
-
+        $album = request()-> except('_token','_method');
+        if($request->hasFile('caratula')){
+            $caratulaAlbum=Album::findOrFail($id);
+            Storage::delete('public/'.$caratulaAlbum->caratula);
+            $album['caratula']=$request->file('caratula')->store('uploads', 'public');
+        }else{
+            unset($album['caratula']);
+        }
+        Album::where('id','=',$id)->update($album);
         return redirect()->route('albums.index')
-            ->with('success', 'Album updated successfully');
+        ->with('success', 'Album updated successfully');
     }
 
     /**

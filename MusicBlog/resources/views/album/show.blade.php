@@ -33,8 +33,11 @@
                             {{ $album->anio }}
                         </div>
                         <div class="form-group">
-                            <strong>Caratula:</strong>
-                            {{ $album->caratula }}
+                        @if(isset($album->caratula))
+                            <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$album->caratula }}" width="100" alt="">
+                        @else
+                            <img class="img-thumbnail img-fluid" src="https://dbdzm869oupei.cloudfront.net/img/vinylrugs/preview/18784.png" alt="" width="100">
+                        @endif
                         </div>
 
                     </div>

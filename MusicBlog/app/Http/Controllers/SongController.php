@@ -6,6 +6,7 @@ use App\Models\Song;
 use App\Models\Album;
 use App\Models\Singer;
 use App\Models\Gender;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 /**
@@ -51,8 +52,13 @@ class SongController extends Controller
     {
         request()->validate(Song::$rules);
 
-        $song = Song::create($request->all());
+        // $song = Song::create($request->all());
 
+        $song = request()->except('_token');
+        if($request->hasFile('caratula')){
+            $song['caratula']=$request->file('caratula')->store('uploads','public');
+        }
+        Song::insert($song);
         return redirect()->route('songs.index')
             ->with('success', 'Song created successfully.');
     }
@@ -92,11 +98,19 @@ class SongController extends Controller
      * @param  Song $song
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Song $song)
+    public function update(Request $request, $id)
     {
         request()->validate(Song::$rules);
 
-        $song->update($request->all());
+        $song = request()-> except('_token','_method');
+        if($request->hasFile('caratula')){
+            $caratulaSong=Song::findOrFail($id);
+            Storage::delete('public/'.$caratulaSong->caratula);
+            $song['caratula']=$request->file('caratula')->store('uploads', 'public');
+        }else{
+            unset($song['caratula']);
+        }
+        Song::where('id','=',$id)->update($song);
 
         return redirect()->route('songs.index')
             ->with('success', 'Song updated successfully');

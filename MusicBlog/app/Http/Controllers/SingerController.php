@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Singer;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 /**
@@ -45,8 +46,13 @@ class SingerController extends Controller
     {
         request()->validate(Singer::$rules);
 
-        $singer = Singer::create($request->all());
+        //$singer = Singer::create($request->all());
 
+        $singer = request()->except('_token');
+        if($request->hasFile('imagen')){
+            $singer['imagen']=$request->file('imagen')->store('uploads','public');
+        }
+        Singer::insert($singer);
         return redirect()->route('singers.index')
             ->with('success', 'Singer created successfully.');
     }
@@ -84,11 +90,18 @@ class SingerController extends Controller
      * @param  Singer $singer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Singer $singer)
+    public function update(Request $request, $id)
     {
-        request()->validate(Singer::$rules);
 
-        $singer->update($request->all());
+        $singer = request()-> except('_token','_method');
+        if($request->hasFile('imagen')){
+            $imagenSinger=Singer::findOrFail($id);
+            Storage::delete('public/'.$imagenSinger->imagen);
+            $singer['imagen']=$request->file('imagen')->store('uploads', 'public');
+        }else{
+            unset($singer['imagen']);
+        }
+        Singer::where('id','=',$id)->update($singer);
 
         return redirect()->route('singers.index')
             ->with('success', 'Singer updated successfully');

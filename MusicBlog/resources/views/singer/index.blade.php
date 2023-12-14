@@ -37,9 +37,9 @@
                                         <th>No</th>
                                         
 										<th>Nombre</th>
-										<th>Anio Nacimiento</th>
+										<th>Año Nacimiento</th>
 										<th>Nacionalidad</th>
-										<th>Imagen</th>
+										<th>Foto</th>
 
                                         <th></th>
                                     </tr>
@@ -52,7 +52,13 @@
 											<td>{{ $singer->nombre }}</td>
 											<td>{{ $singer->anio_nacimiento }}</td>
 											<td>{{ $singer->nacionalidad }}</td>
-											<td>{{ $singer->imagen }}</td>
+											<td>
+                                                @if(isset($singer->imagen))
+                                                <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$singer->imagen }}" width="100" alt="">
+                                                @else
+                                                <img class="img-thumbnail img-fluid" src="https://thumbs.dreamstime.com/b/female-singer-silhouette-white-background-vector-holding-microphone-84009046.jpg" alt="" width="100">
+                                                @endif
+                                            </td>
 
                                             <td>
                                                 <form action="{{ route('singers.destroy',$singer->id) }}" method="POST">

@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('caratula') }}
-            {{ Form::text('caratula', $song->caratula, ['class' => 'form-control' . ($errors->has('caratula') ? ' is-invalid' : ''), 'placeholder' => 'Caratula']) }}
+            {{ Form::file('caratula', ['class' => 'form-control' . ($errors->has('caratula') ? ' is-invalid' : ''), 'placeholder' => 'Caratula']) }}
             {!! $errors->first('caratula', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 

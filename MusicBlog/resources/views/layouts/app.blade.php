@@ -91,4 +91,9 @@
         </main>
     </div>
 </body>
+<style>
+  td {
+    vertical-align: middle;
+  }
+</style>
 </html>

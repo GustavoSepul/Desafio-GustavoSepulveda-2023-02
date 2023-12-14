@@ -33,8 +33,11 @@
                             {{ $singer->nacionalidad }}
                         </div>
                         <div class="form-group">
-                            <strong>Imagen:</strong>
-                            {{ $singer->imagen }}
+                                @if(isset($singer->imagen))
+                                    <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$singer->imagen }}" width="100" alt="">
+                                @else
+                                    <img class="img-thumbnail img-fluid" src="https://thumbs.dreamstime.com/b/female-singer-silhouette-white-background-vector-holding-microphone-84009046.jpg" alt="" width="100">
+                                @endif
                         </div>
 
                     </div>

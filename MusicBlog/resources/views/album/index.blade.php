@@ -52,7 +52,13 @@
 											<td>{{ $album->titulo }}</td>
 											<td>{{ $album->singer->nombre}}</td>
 											<td>{{ $album->anio }}</td>
-											<td>{{ $album->caratula }}</td>
+											<td>
+                                                @if(isset($album->caratula))
+                                                <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$album->caratula }}" width="100" alt="">
+                                                @else
+                                                <img class="img-thumbnail img-fluid" src="https://dbdzm869oupei.cloudfront.net/img/vinylrugs/preview/18784.png" alt="" width="100">
+                                                @endif
+                                            </td>
 
                                             <td>
                                                 <form action="{{ route('albums.destroy',$album->id) }}" method="POST">
