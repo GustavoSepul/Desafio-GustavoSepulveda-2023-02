@@ -8,7 +8,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('singer_id') }}
-            {{ Form::text('singer_id', $album->singer_id, ['class' => 'form-control' . ($errors->has('singer_id') ? ' is-invalid' : ''), 'placeholder' => 'Singer Id']) }}
+            {{ Form::select('singer_id', $artistas, $album->singer_id, ['class' => 'form-control' . ($errors->has('singer_id') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un Artista']) }}
             {!! $errors->first('singer_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">

@@ -7,13 +7,13 @@
             {!! $errors->first('titulo', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('album_id') }}
-            {{ Form::text('album_id', $song->album_id, ['class' => 'form-control' . ($errors->has('album_id') ? ' is-invalid' : ''), 'placeholder' => 'Album Id']) }}
+            {{ Form::label('Álbum') }}
+            {{ Form::select('album_id', $albumes, $song->album_id, ['class' => 'form-control' . ($errors->has('album_id') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un Álbum']) }}
             {!! $errors->first('album_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('gender_id') }}
-            {{ Form::text('gender_id', $song->gender_id, ['class' => 'form-control' . ($errors->has('gender_id') ? ' is-invalid' : ''), 'placeholder' => 'Gender Id']) }}
+            {{ Form::select('gender_id', $generos, $song->gender_id, ['class' => 'form-control' . ($errors->has('gender_id') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un Género']) }}
             {!! $errors->first('gender_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">

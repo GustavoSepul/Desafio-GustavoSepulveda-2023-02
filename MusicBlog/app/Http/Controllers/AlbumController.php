@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Album;
+use App\Models\Singer;
 use Illuminate\Http\Request;
 
 /**
@@ -32,7 +33,8 @@ class AlbumController extends Controller
     public function create()
     {
         $album = new Album();
-        return view('album.create', compact('album'));
+        $artistas = Singer::pluck('nombre','id');
+        return view('album.create', compact('album','artistas'));
     }
 
     /**
@@ -73,8 +75,8 @@ class AlbumController extends Controller
     public function edit($id)
     {
         $album = Album::find($id);
-
-        return view('album.edit', compact('album'));
+        $artistas = Singer::pluck('nombre','id');
+        return view('album.edit', compact('album','artistas'));
     }
 
     /**

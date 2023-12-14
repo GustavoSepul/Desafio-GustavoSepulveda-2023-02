@@ -36,10 +36,10 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Titulo</th>
-										<th>Singer Id</th>
-										<th>Anio</th>
-										<th>Caratula</th>
+										<th>Título</th>
+										<th>Cantante(es)</th>
+										<th>Año</th>
+										<th>Carátula</th>
 
                                         <th></th>
                                     </tr>
@@ -50,7 +50,7 @@
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $album->titulo }}</td>
-											<td>{{ $album->singer_id }}</td>
+											<td>{{ $album->singer->nombre}}</td>
 											<td>{{ $album->anio }}</td>
 											<td>{{ $album->caratula }}</td>
 

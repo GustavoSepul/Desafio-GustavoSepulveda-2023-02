@@ -37,10 +37,10 @@
                                         <th>No</th>
                                         
 										<th>Titulo</th>
-										<th>Album Id</th>
-										<th>Gender Id</th>
-										<th>Anio</th>
-										<th>Caratula</th>
+										<th>Álbum</th>
+										<th>Género</th>
+										<th>Año</th>
+										<th>Carátula</th>
 
                                         <th></th>
                                     </tr>
@@ -51,8 +51,14 @@
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $song->titulo }}</td>
-											<td>{{ $song->album_id }}</td>
-											<td>{{ $song->gender_id }}</td>
+											<td>
+                                                @if(isset($song->album_id))
+                                                {{ $song->album->titulo }}
+                                                @else
+                                                Sencillo
+                                                @endif
+                                            </td>
+											<td>{{ $song->gender->nombre }}</td>
 											<td>{{ $song->anio }}</td>
 											<td>{{ $song->caratula }}</td>
 

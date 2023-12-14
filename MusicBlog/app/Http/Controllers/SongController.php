@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Song;
+use App\Models\Album;
+use App\Models\Singer;
+use App\Models\Gender;
 use Illuminate\Http\Request;
 
 /**
@@ -32,7 +35,10 @@ class SongController extends Controller
     public function create()
     {
         $song = new Song();
-        return view('song.create', compact('song'));
+        $albumes = Album::pluck('titulo','id');
+        $artistas = Singer::pluck('nombre','id');
+        $generos = Gender::pluck('nombre','id');
+        return view('song.create', compact('song','albumes','artistas','generos'));
     }
 
     /**
@@ -73,8 +79,10 @@ class SongController extends Controller
     public function edit($id)
     {
         $song = Song::find($id);
-
-        return view('song.edit', compact('song'));
+        $albumes = Album::pluck('titulo','id');
+        $artistas = Singer::pluck('nombre','id');
+        $generos = Gender::pluck('nombre','id');
+        return view('song.edit', compact('song','albumes','artistas','generos'));
     }
 
     /**
