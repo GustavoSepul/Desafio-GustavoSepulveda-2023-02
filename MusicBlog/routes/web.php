@@ -19,9 +19,4 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('canciones', App\Http\Controllers\CancioneController::class);
-Route::resource('albumes', App\Http\Controllers\AlbumeController::class);
-Route::resource('artistas', App\Http\Controllers\ArtistaController::class);
-Route::resource('generos', App\Http\Controllers\GeneroController::class);
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
