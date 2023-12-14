@@ -37,12 +37,11 @@
                             {{ $song->anio }}
                         </div>
                         <div class="form-group">
-
-                        @if(isset($song->caratula))
-                                                <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$song->caratula }}" width="100" alt="">
-                                            @else
-                                                <img class="img-thumbnail img-fluid" src="https://dbdzm869oupei.cloudfront.net/img/vinylrugs/preview/18784.png" alt="" width="100">
-                                            @endif
+                            @if(isset($song->caratula))
+                                <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$song->caratula }}" width="100" alt="">
+                            @else
+                                <img class="img-thumbnail img-fluid" src="https://dbdzm869oupei.cloudfront.net/img/vinylrugs/preview/18784.png" alt="" width="100">
+                            @endif
                         </div>
 
                     </div>
