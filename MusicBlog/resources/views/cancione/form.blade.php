@@ -6,21 +6,19 @@
             {{ Form::text('titulo', $cancione->titulo, ['class' => 'form-control' . ($errors->has('titulo') ? ' is-invalid' : ''), 'placeholder' => 'Titulo']) }}
             {!! $errors->first('titulo', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-
         <div class="form-group">
-            {{ Form::label('Álbum') }}
-            {{ Form::select('album_id', $albumes, $cancione->album_id, ['class' => 'form-control' . ($errors->has('album_id') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un Álbum']) }}
+            {{ Form::label('album_id') }}
+            {{ Form::text('album_id', $cancione->album_id, ['class' => 'form-control' . ($errors->has('album_id') ? ' is-invalid' : ''), 'placeholder' => 'Album Id']) }}
             {!! $errors->first('album_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-
         <div class="form-group">
-            {{ Form::label('artista') }}
-            {{ Form::select('artista_id', $artistas, $cancione->artista_id, ['class' => 'form-control' . ($errors->has('artista_id') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un Artista']) }}
+            {{ Form::label('artista_id') }}
+            {{ Form::text('artista_id', $cancione->artista_id, ['class' => 'form-control' . ($errors->has('artista_id') ? ' is-invalid' : ''), 'placeholder' => 'Artista Id']) }}
             {!! $errors->first('artista_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('genero') }}
-            {{ Form::select('genero_id', $generos, $cancione->genero_id, ['class' => 'form-control' . ($errors->has('genero_id') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un Género']) }}
+            {{ Form::label('genero_id') }}
+            {{ Form::text('genero_id', $cancione->genero_id, ['class' => 'form-control' . ($errors->has('genero_id') ? ' is-invalid' : ''), 'placeholder' => 'Genero Id']) }}
             {!! $errors->first('genero_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">

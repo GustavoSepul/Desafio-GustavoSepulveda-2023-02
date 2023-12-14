@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cancione;
-use App\Models\Albume;
-use App\Models\Artista;
-use App\Models\Genero;
 use Illuminate\Http\Request;
 
 /**
@@ -35,10 +32,7 @@ class CancioneController extends Controller
     public function create()
     {
         $cancione = new Cancione();
-        $albumes = Albume::pluck('titulo','id');
-        $artistas = Artista::pluck('nombre','id');
-        $generos = Genero::pluck('nombre','id');
-        return view('cancione.create', compact('cancione','albumes','artistas','generos'));
+        return view('cancione.create', compact('cancione'));
     }
 
     /**
@@ -79,10 +73,8 @@ class CancioneController extends Controller
     public function edit($id)
     {
         $cancione = Cancione::find($id);
-        $albumes = Albume::pluck('titulo','id');
-        $artistas = Artista::pluck('nombre','id');
-        $generos = Genero::pluck('nombre','id');
-        return view('cancione.edit', compact('cancione','albumes','artistas','generos'));
+
+        return view('cancione.edit', compact('cancione'));
     }
 
     /**
