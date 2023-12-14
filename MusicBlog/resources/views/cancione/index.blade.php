@@ -37,12 +37,12 @@
                                         <th>No</th>
                                         
 										<th>Titulo</th>
-										<th>Album Id</th>
-										<th>Artista Id</th>
-										<th>Genero Id</th>
-										<th>Duracion</th>
-										<th>Anio</th>
-										<th>Caratula</th>
+										<th>Álbum</th>
+										<th>Artista</th>
+										<th>Género</th>
+										<th>Duración</th>
+										<th>Año</th>
+										<th>Carátula</th>
 
                                         <th></th>
                                     </tr>
@@ -53,9 +53,15 @@
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $cancione->titulo }}</td>
-											<td>{{ $cancione->album_id }}</td>
-											<td>{{ $cancione->artista_id }}</td>
-											<td>{{ $cancione->genero_id }}</td>
+											<td>
+                                                {{ $cancione->albume->titulo }}
+                                            </td>
+											<td>
+                                                {{ $cancione->artista->nombre }}
+                                            </td>
+											<td>
+                                                {{ $cancione->genero->nombre }}
+                                            </td>
 											<td>{{ $cancione->duracion }}</td>
 											<td>{{ $cancione->anio }}</td>
 											<td>{{ $cancione->caratula }}</td>
