@@ -12,6 +12,7 @@
             </div>   
         </div>
 
+        
         <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
                 <div class="card p-4 bg-white">
                     <div class="d-flex flex-column justify-content-center align-items-center">
@@ -39,6 +40,25 @@
                             {{ $album->anio }}
                             </strong>  
                         </p>
+                        <p class="lead">
+                            <strong>
+                            Canciones:
+                            </strong>  
+                        </p>   
+                        
+                        @foreach ($songs as $song)
+                        <p class="lead">
+                            <strong>
+                            {{ $loop->index + 1 }}. <a class="text-black" href="{{ route('songs.show',$song->id) }}">{{ $song->titulo}}</a>
+                            <!-- @if(isset($song->audio))
+                            <audio controls>
+                            <source src="{{ Storage::url($song->audio) }}" type="audio/mp3">
+                            </audio>
+                            @endif -->
+                            </strong>  
+                        </p>   
+                        
+                        @endforeach
                             <hr>
                             <a class="btn btn-secondary" href="{{ route('albums.index') }}">Regresar</a>
                         </a>

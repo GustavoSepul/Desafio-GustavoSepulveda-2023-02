@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\Singer;
+use App\Models\Song;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 /**
@@ -67,8 +69,11 @@ class AlbumController extends Controller
     public function show($id)
     {
         $album = Album::find($id);
-
-        return view('album.show', compact('album'));
+        $songs = DB::table('songs')
+        ->select('titulo','audio','id')
+        ->where('album_id','=',$id)
+        ->get();
+        return view('album.show', compact('album','songs'));
     }
 
     /**
