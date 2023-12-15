@@ -25,6 +25,7 @@ class Songs extends Migration
 
             $table->integer('anio');
             $table->longtext('caratula')->nullable();
+            $table->longtext('audio')->nullable();
             $table->timestamps();
 
             $table->foreign('album_id')->references('id')->on('albums')->onDelete("cascade")->onUpdate('cascade');

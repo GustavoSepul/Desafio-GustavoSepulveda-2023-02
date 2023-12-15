@@ -6,40 +6,42 @@
 
 @section('content')
     <section class="content container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Singer</span>
-                        </div>
-                        <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('singers.index') }}"> {{ __('Back') }}</a>
-                        </div>
-                    </div>
+        <div class="row m-0 p-4">
+            <div class="col-12 text-center">
+                <span style="font-size: 30px;">Detalles del Artista</span>
+            </div>   
+        </div>
 
-                    <div class="card-body">
-                        
-                        <div class="form-group">
-                            <strong>Nombre:</strong>
+        <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+                <div class="card p-4 bg-white">
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                    @if(isset($singer->imagen))
+                        <div class="foto-circular">
+                            <img class="" id="vinil" src="{{ asset('storage').'/'.$singer->imagen }}" width="100" alt="">
+                        </div>
+                    @else
+                        <div class="foto-circular">
+                            <img class="" id="vinil" src="https://thumbs.dreamstime.com/b/female-singer-silhouette-white-background-vector-holding-microphone-84009046.jpg" alt="" width="100">
+                        </div> 
+                    @endif
+                        <p class="lead mt-3">
+                            <strong>
                             {{ $singer->nombre }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Anio Nacimiento:</strong>
+                            </strong>
+                        </p>
+                        <p class="lead">
+                            <strong>
                             {{ $singer->anio_nacimiento }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Nacionalidad:</strong>
+                            </strong>  
+                        </p>
+                        <p class="lead">
+                            <strong>
                             {{ $singer->nacionalidad }}
-                        </div>
-                        <div class="form-group">
-                                @if(isset($singer->imagen))
-                                    <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$singer->imagen }}" width="100" alt="">
-                                @else
-                                    <img class="img-thumbnail img-fluid" src="https://thumbs.dreamstime.com/b/female-singer-silhouette-white-background-vector-holding-microphone-84009046.jpg" alt="" width="100">
-                                @endif
-                        </div>
-
+                            </strong>  
+                        </p>
+                            <hr>
+                            <a class="btn btn-secondary" href="{{ route('singers.index') }}">Regresar</a>
+                        </a>
                     </div>
                 </div>
             </div>

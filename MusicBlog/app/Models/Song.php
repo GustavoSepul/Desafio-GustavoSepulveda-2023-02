@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $gender_id
  * @property $anio
  * @property $caratula
+ * @property $audio
  * @property $created_at
  * @property $updated_at
  *
@@ -38,7 +39,7 @@ class Song extends Model
      *
      * @var array
      */
-    protected $fillable = ['titulo','album_id','gender_id','anio','caratula'];
+    protected $fillable = ['titulo','album_id','gender_id','anio','caratula','audio'];
 
 
     /**

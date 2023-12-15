@@ -40,7 +40,7 @@
 										<th>Álbum</th>
 										<th>Género</th>
 										<th>Año</th>
-										<th>Carátula</th>
+										<th>Audio</th>
 
                                         <th></th>
                                     </tr>
@@ -53,7 +53,7 @@
 											<td>{{ $song->titulo }}</td>
 											<td>
                                                 @if(isset($song->album_id))
-                                                {{ $song->album->titulo }}
+                                                <a class="text-black" href="{{ route('albums.show',$song->album->id) }}">{{ $song->album->titulo }}</a>
                                                 @else
                                                 Sencillo
                                                 @endif
@@ -61,11 +61,10 @@
 											<td>{{ $song->gender->nombre }}</td>
 											<td>{{ $song->anio }}</td>
 											<td>
-
-                                            @if(isset($song->caratula))
-                                                <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$song->caratula }}" width="100" alt="">
-                                            @else
-                                                <img class="img-thumbnail img-fluid" src="https://dbdzm869oupei.cloudfront.net/img/vinylrugs/preview/18784.png" alt="" width="100">
+                                            @if(isset($song->audio))
+                                            <audio controls>
+                                            <source src="{{ Storage::url($song->audio) }}" type="audio/mp3">
+                                            </audio>
                                             @endif
 
                                             </td>

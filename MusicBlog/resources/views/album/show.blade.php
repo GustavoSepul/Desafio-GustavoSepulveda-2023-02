@@ -6,40 +6,42 @@
 
 @section('content')
     <section class="content container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Album</span>
-                        </div>
-                        <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('albums.index') }}"> {{ __('Back') }}</a>
-                        </div>
+        <div class="row m-0 p-4">
+            <div class="col-12 text-center">
+                <span style="font-size: 30px;">Detalles del Álbum</span>
+            </div>   
+        </div>
+
+        <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+                <div class="card p-4 bg-white">
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                    @if(isset($album->caratula))
+                    <div class="circular--landscape2">
+                        <img class="" id="vinil" src="{{ asset('storage').'/'.$album->caratula }}" width="100" alt="">
                     </div>
-
-                    <div class="card-body">
-                        
-                        <div class="form-group">
-                            <strong>Titulo:</strong>
+                    @else
+                    <div class="circular--landscape2">
+                        <img class="" id="vinil" src="https://dbdzm869oupei.cloudfront.net/img/vinylrugs/preview/18784.png" alt="" width="100">
+                    </div>    
+                    @endif
+                        <p class="lead mt-3">
+                            <strong>
                             {{ $album->titulo }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Singer Id:</strong>
-                            {{ $album->singer_id }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Anio:</strong>
+                            </strong>
+                        </p>
+                        <p class="lead">
+                            <strong>
+                            {{ $album->singer->nombre}}
+                            </strong>  
+                        </p>
+                        <p class="lead">
+                            <strong>
                             {{ $album->anio }}
-                        </div>
-                        <div class="form-group">
-                        @if(isset($album->caratula))
-                            <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$album->caratula }}" width="100" alt="">
-                        @else
-                            <img class="img-thumbnail img-fluid" src="https://dbdzm869oupei.cloudfront.net/img/vinylrugs/preview/18784.png" alt="" width="100">
-                        @endif
-                        </div>
-
+                            </strong>  
+                        </p>
+                            <hr>
+                            <a class="btn btn-secondary" href="{{ route('albums.index') }}">Regresar</a>
+                        </a>
                     </div>
                 </div>
             </div>

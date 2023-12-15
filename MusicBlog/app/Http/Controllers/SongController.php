@@ -58,6 +58,9 @@ class SongController extends Controller
         if($request->hasFile('caratula')){
             $song['caratula']=$request->file('caratula')->store('uploads','public');
         }
+        if($request->hasFile('audio')){
+            $song['audio']=$request->file('audio')->store('uploads','public');
+        }
         Song::insert($song);
         return redirect()->route('songs.index')
             ->with('success', 'Song created successfully.');
@@ -109,6 +112,14 @@ class SongController extends Controller
             $song['caratula']=$request->file('caratula')->store('uploads', 'public');
         }else{
             unset($song['caratula']);
+        }
+        Song::where('id','=',$id)->update($song);
+        if($request->hasFile('audio')){
+            $audioSong=Song::findOrFail($id);
+            Storage::delete('public/'.$audioSong->audio);
+            $song['audio']=$request->file('audio')->store('uploads', 'public');
+        }else{
+            unset($song['audio']);
         }
         Song::where('id','=',$id)->update($song);
 
