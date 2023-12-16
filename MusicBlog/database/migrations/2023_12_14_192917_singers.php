@@ -20,9 +20,10 @@ class Singers extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->integer('anio_nacimiento');
-            $table->string('nacionalidad');
+            $table->bigInteger('pais_id')->unsigned();
             $table->longtext('imagen')->nullable();
             $table->timestamps();
+            $table->foreign('pais_id')->references('id')->on('countries')->onDelete("cascade")->onUpdate('cascade');
         });
     }
 

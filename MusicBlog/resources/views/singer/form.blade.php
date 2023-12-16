@@ -12,18 +12,22 @@
             {!! $errors->first('anio_nacimiento', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('nacionalidad') }}
-            {{ Form::text('nacionalidad', $singer->nacionalidad, ['class' => 'form-control' . ($errors->has('nacionalidad') ? ' is-invalid' : ''), 'placeholder' => 'Nacionalidad']) }}
-            {!! $errors->first('nacionalidad', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('pais_id') }}
+            {{ Form::select('pais_id', $paises, $singer->pais_id, ['class' => 'form-control elegir_pais' . ($errors->has('pais_id') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un Pais']) }}
+            {!! $errors->first('pais_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('imagen') }}
             {{ Form::file('imagen', ['class' => 'form-control' . ($errors->has('imagen') ? ' is-invalid' : ''), 'placeholder' => 'Imagen']) }}
             {!! $errors->first('imagen', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-
     </div>
     <div class="box-footer mt20">
         <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('.elegir_pais').select2();
+    });
+</script>

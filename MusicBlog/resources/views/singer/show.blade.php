@@ -36,7 +36,7 @@
                         </p>
                         <p class="lead">
                             <strong>
-                            {{ $singer->nacionalidad }}
+                            {{ $singer->country->name}}
                             </strong>  
                         </p>
                             <hr>

@@ -38,7 +38,7 @@
                                         
 										<th>Nombre</th>
 										<th>Año Nacimiento</th>
-										<th>Nacionalidad</th>
+										<th>Pais</th>
 										<th>Foto</th>
 
                                         <th></th>
@@ -51,7 +51,7 @@
                                             
 											<td>{{ $singer->nombre }}</td>
 											<td>{{ $singer->anio_nacimiento }}</td>
-											<td>{{ $singer->nacionalidad }}</td>
+											<td>{{ $singer->country->name}}</td>
 											<td>
                                                 @if(isset($singer->imagen))
                                                 <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$singer->imagen }}" width="100" alt="">

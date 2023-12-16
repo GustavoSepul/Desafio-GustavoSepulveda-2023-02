@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property $id
  * @property $nombre
  * @property $anio_nacimiento
- * @property $nacionalidad
+ * @property $pais_id
  * @property $imagen
  * @property $created_at
  * @property $updated_at
@@ -28,7 +28,7 @@ class Singer extends Model
     static $rules = [
 		'nombre' => 'required',
 		'anio_nacimiento' => 'required',
-		'nacionalidad' => 'required',
+		'pais_id' => 'required',
     ];
 
     protected $perPage = 20;
@@ -38,7 +38,7 @@ class Singer extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre','anio_nacimiento','nacionalidad','imagen'];
+    protected $fillable = ['nombre','anio_nacimiento','pais_id','imagen'];
 
 
     /**
@@ -47,6 +47,14 @@ class Singer extends Model
     public function albums()
     {
         return $this->hasMany('App\Models\Album', 'singer_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function country()
+    {
+        return $this->hasOne('App\Models\Country', 'id', 'pais_id');
     }
     
 

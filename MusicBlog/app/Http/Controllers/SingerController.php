@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Singer;
+use App\Models\Country;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,8 @@ class SingerController extends Controller
     public function create()
     {
         $singer = new Singer();
-        return view('singer.create', compact('singer'));
+        $paises = Country::pluck('name','id');
+        return view('singer.create', compact('singer','paises'));
     }
 
     /**
@@ -79,8 +81,8 @@ class SingerController extends Controller
     public function edit($id)
     {
         $singer = Singer::find($id);
-
-        return view('singer.edit', compact('singer'));
+        $paises = Country::pluck('name','id');
+        return view('singer.edit', compact('singer','paises'));
     }
 
     /**
