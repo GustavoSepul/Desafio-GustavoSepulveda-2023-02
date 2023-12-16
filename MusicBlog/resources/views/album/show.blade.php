@@ -60,7 +60,7 @@
                         
                         @endforeach
                             <hr>
-                            <a class="btn btn-secondary" href="{{ route('albums.index') }}">Regresar</a>
+                            <a class="btn btn-secondary" href="javascript:history.back()">Regresar</a>
                         </a>
                     </div>
                 </div>
