@@ -40,7 +40,7 @@
 										<th>Álbum</th>
 										<th>Género</th>
 										<th>Año</th>
-										<th>Audio</th>
+										<th>Artista(s)</th>
 
                                         <th></th>
                                     </tr>
@@ -61,11 +61,10 @@
 											<td>{{ $song->gender->nombre }}</td>
 											<td>{{ $song->anio }}</td>
 											<td>
-                                            @if(isset($song->audio))
-                                            <audio controls>
-                                            <source src="{{ Storage::url($song->audio) }}" type="audio/mp3">
-                                            </audio>
-                                            @endif
+                                            @foreach($song->singers as $singer)
+                                                {{ $singer->nombre }}
+                                                @if(!$loop->last) , @endif
+                                            @endforeach
 
                                             </td>
 

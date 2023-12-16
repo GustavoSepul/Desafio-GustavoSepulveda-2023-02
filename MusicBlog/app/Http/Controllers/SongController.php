@@ -37,9 +37,9 @@ class SongController extends Controller
     {
         $song = new Song();
         $albumes = Album::pluck('titulo','id');
-        $artistas = Singer::pluck('nombre','id');
+        $singers = Singer::all();
         $generos = Gender::pluck('nombre','id');
-        return view('song.create', compact('song','albumes','artistas','generos'));
+        return view('song.create', compact('song','albumes','singers','generos'));
     }
 
     /**
@@ -50,18 +50,43 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Song::$rules);
-
-        // $song = Song::create($request->all());
-
-        $song = request()->except('_token');
-        if($request->hasFile('caratula')){
-            $song['caratula']=$request->file('caratula')->store('uploads','public');
+        // request()->validate(Song::$rules);
+        // $request->validate([
+        //     'singers' => [
+        //         'required',
+        //         'array',
+        //         'min:1',
+        //     ],
+        // ]);
+        $rules = [
+            'titulo' => 'required|string|max:255',
+            'singers' => [
+                'required',
+                'array',
+                'min:1'
+            ],
+            // Otras reglas de validación según sea necesario
+        ];
+    
+        $customMessages = [
+            'singers.min' => 'Selecciona al menos un artista.',
+        ];
+    
+        $request->validate($rules, $customMessages);
+        $song = new Song([
+            'titulo' => $request->input('titulo'),
+            'album_id' => $request->input('album_id'),
+            'gender_id' => $request->input('gender_id'),
+            'anio' => $request->input('anio'),
+        ]);
+        if ($request->hasFile('caratula')) {
+            $song->caratula = $request->file('caratula')->store('uploads', 'public');
         }
-        if($request->hasFile('audio')){
-            $song['audio']=$request->file('audio')->store('uploads','public');
+        if ($request->hasFile('audio')) {
+            $song->audio = $request->file('audio')->store('uploads', 'public');
         }
-        Song::insert($song);
+        $song->save();
+        $song->singers()->attach($request->input('singers'));
         return redirect()->route('songs.index')
             ->with('success', 'Song created successfully.');
     }
@@ -87,11 +112,12 @@ class SongController extends Controller
      */
     public function edit($id)
     {
-        $song = Song::find($id);
+        $song = Song::findOrFail($id);
+        $singers = Singer::all();
+        $selectedSingers = $song->singers()->pluck('singers.id')->toArray();
         $albumes = Album::pluck('titulo','id');
-        $artistas = Singer::pluck('nombre','id');
         $generos = Gender::pluck('nombre','id');
-        return view('song.edit', compact('song','albumes','artistas','generos'));
+        return view('song.edit', compact('song','albumes','singers','generos','selectedSingers'));
     }
 
     /**
@@ -103,25 +129,33 @@ class SongController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         request()->validate(Song::$rules);
 
-        $song = request()-> except('_token','_method');
-        if($request->hasFile('caratula')){
-            $caratulaSong=Song::findOrFail($id);
-            Storage::delete('public/'.$caratulaSong->caratula);
-            $song['caratula']=$request->file('caratula')->store('uploads', 'public');
-        }else{
-            unset($song['caratula']);
+        $song = Song::findOrFail($id);
+
+        $song->update([
+            'titulo' => $request->input('titulo'),
+            'album_id' => $request->input('album_id'),
+            'gender_id' => $request->input('gender_id'),
+            'anio' => $request->input('anio')
+        ]);
+
+        // Actualizar la imagen de la carátula si se proporciona
+        if ($request->hasFile('caratula')) {
+            $song->caratula = $request->file('caratula')->store('uploads', 'public');
         }
-        Song::where('id','=',$id)->update($song);
-        if($request->hasFile('audio')){
-            $audioSong=Song::findOrFail($id);
-            Storage::delete('public/'.$audioSong->audio);
-            $song['audio']=$request->file('audio')->store('uploads', 'public');
-        }else{
-            unset($song['audio']);
+
+        // Actualizar el archivo de audio si se proporciona
+        if ($request->hasFile('audio')) {
+            $song->audio = $request->file('audio')->store('uploads', 'public');
         }
-        Song::where('id','=',$id)->update($song);
+
+        // Guardar los cambios en la canción
+        $song->save();
+
+        // Sincronizar los artistas asociados
+        $song->singers()->sync($request->input('singers'));
 
         return redirect()->route('songs.index')
             ->with('success', 'Song updated successfully');

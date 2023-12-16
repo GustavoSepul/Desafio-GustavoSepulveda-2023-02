@@ -24,4 +24,5 @@ Route::resource('albums', App\Http\Controllers\AlbumController::class);
 Route::resource('singers', App\Http\Controllers\SingerController::class);
 Route::resource('genders', App\Http\Controllers\GenderController::class);
 
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

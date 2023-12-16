@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Singer
@@ -22,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Singer extends Model
 {
+    use HasFactory;
     
     static $rules = [
 		'nombre' => 'required',
@@ -47,12 +49,10 @@ class Singer extends Model
         return $this->hasMany('App\Models\Album', 'singer_id', 'id');
     }
     
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function singersSong()
+
+    public function songs()
     {
-        return $this->hasOne('App\Models\SingersSong', 'singer_id', 'id');
+        return $this->belongsToMany(Song::class, 'singers_songs');
     }
     
 

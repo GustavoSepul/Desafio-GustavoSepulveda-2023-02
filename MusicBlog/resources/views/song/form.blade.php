@@ -17,6 +17,18 @@
             {!! $errors->first('gender_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
+            <label for="singers" class="form-label">Artista(as)</label>
+            <select class="js-example-basic-multiple form-control" name="singers[]" multiple="multiple" placeholder="Seleccione un artista">
+            @foreach($singers as $singer)
+                <option value="{{ $singer->id }}" {{ isset($selectedSingers) && in_array($singer->id, $selectedSingers) ? 'selected' : '' }}>{{ $singer->nombre }}</option>
+            @endforeach
+            </select>
+
+                    @error('singers')
+                <p class="text-danger">{{ $message }}</p>
+            @enderror
+        </div>
+        <div class="form-group">
             {{ Form::label('anio') }}
             {{ Form::text('anio', $song->anio, ['class' => 'form-control' . ($errors->has('anio') ? ' is-invalid' : ''), 'placeholder' => 'Anio']) }}
             {!! $errors->first('anio', '<div class="invalid-feedback">:message</div>') !!}
@@ -31,9 +43,16 @@
             {{ Form::file('audio', ['class' => 'form-control' . ($errors->has('audio') ? ' is-invalid' : ''), 'placeholder' => 'Audio']) }}
             {!! $errors->first('audio', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-
     </div>
     <div class="box-footer mt20">
         <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+    });
+</script>
+<script>
+</script>

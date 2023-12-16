@@ -15,12 +15,14 @@ class SingersSongs extends Migration
     {
         //
         Schema::create('singers_songs', function (Blueprint $table) {
-            $table->bigInteger('singer_id')->unsigned();
-            $table->bigInteger('song_id')->unsigned();
-            $table->primary(['singer_id','song_id']);
+            $table->id();
+
+            $table->unsignedBigInteger('singer_id');
+            $table->unsignedBigInteger('song_id');
 
             $table->foreign('singer_id')->references('id')->on('singers')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('song_id')->references('id')->on('songs')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 
