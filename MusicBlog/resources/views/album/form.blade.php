@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('anio') }}
-            {{ Form::text('anio', $album->anio, ['class' => 'form-control' . ($errors->has('anio') ? ' is-invalid' : ''), 'placeholder' => 'Anio']) }}
+            {!! Form::selectRange('anio', now()->year, now()->year - 100, isset($album) ? $album->anio : null, ['class' => 'form-control select_multiple' . ($errors->has('anio') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un Año']) !!}
             {!! $errors->first('anio', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
@@ -27,3 +27,8 @@
         <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('.select_multiple').select2();
+    });
+</script>

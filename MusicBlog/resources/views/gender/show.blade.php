@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Gender</span>
+                            <span class="card-title">{{ __('Ver') }} Género</span>
                         </div>
                         <div class="float-right">
                             <a class="btn btn-primary" href="{{ route('genders.index') }}"> {{ __('Back') }}</a>

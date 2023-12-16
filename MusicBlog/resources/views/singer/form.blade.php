@@ -7,12 +7,12 @@
             {!! $errors->first('nombre', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('anio_nacimiento') }}
-            {{ Form::text('anio_nacimiento', $singer->anio_nacimiento, ['class' => 'form-control' . ($errors->has('anio_nacimiento') ? ' is-invalid' : ''), 'placeholder' => 'Anio Nacimiento']) }}
+            {{ Form::label('Año de Nacimiento') }}
+            {!! Form::selectRange('anio_nacimiento', now()->year, now()->year - 100, isset($singer) ? $singer->anio_nacimiento : null, ['class' => 'form-control elegir_pais' . ($errors->has('anio_nacimiento') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un Año']) !!}
             {!! $errors->first('anio_nacimiento', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('pais_id') }}
+            {{ Form::label('Pais de Origen') }}
             {{ Form::select('pais_id', $paises, $singer->pais_id, ['class' => 'form-control elegir_pais' . ($errors->has('pais_id') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un Pais']) }}
             {!! $errors->first('pais_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>

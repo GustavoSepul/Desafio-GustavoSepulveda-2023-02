@@ -37,7 +37,7 @@
                                         <th>No</th>
                                         
 										<th>Título</th>
-										<th>Cantante(es)</th>
+										<th>Autor</th>
 										<th>Año</th>
 										<th>Carátula</th>
 

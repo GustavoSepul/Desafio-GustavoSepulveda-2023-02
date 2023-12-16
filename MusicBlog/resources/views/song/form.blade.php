@@ -18,7 +18,7 @@
         </div>
         <div class="form-group">
             <label for="singers" class="form-label">Artista(as)</label>
-            <select class="js-example-basic-multiple form-control" name="singers[]" multiple="multiple" placeholder="Seleccione un artista">
+            <select class="select_multiple form-control" name="singers[]" multiple="multiple" placeholder="Seleccione un artista">
             @foreach($singers as $singer)
                 <option value="{{ $singer->id }}" {{ isset($selectedSingers) && in_array($singer->id, $selectedSingers) ? 'selected' : '' }}>{{ $singer->nombre }}</option>
             @endforeach
@@ -30,7 +30,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('anio') }}
-            {{ Form::text('anio', $song->anio, ['class' => 'form-control' . ($errors->has('anio') ? ' is-invalid' : ''), 'placeholder' => 'Anio']) }}
+            {!! Form::selectRange('anio', now()->year, now()->year - 100, isset($song) ? $song->anio : null, ['class' => 'form-control select_multiple' . ($errors->has('anio') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un Año']) !!}
             {!! $errors->first('anio', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
@@ -51,7 +51,7 @@
 
 <script>
     $(document).ready(function() {
-        $('.js-example-basic-multiple').select2();
+        $('.select_multiple').select2();
     });
 </script>
 <script>

@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Album</span>
+                        <span class="card-title">{{ __('Editar') }} Album</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('albums.update', $album->id) }}"  role="form" enctype="multipart/form-data">
