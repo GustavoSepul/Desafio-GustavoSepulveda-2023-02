@@ -41,4 +41,8 @@ class LandingController extends Controller
             ], 200);
         }
     }
+
+    function likeList(){
+        return view('likeList');
+    }
 }
