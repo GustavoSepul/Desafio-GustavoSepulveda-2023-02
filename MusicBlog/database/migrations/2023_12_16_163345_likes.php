@@ -16,8 +16,8 @@ class Likes extends Migration
         //
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("song_id")->constrained();
-            $table->foreignId("user_id")->constrained();
+            $table->foreignId("song_id")->constrained()->onDelete("cascade")->onUpdate('cascade');
+            $table->foreignId("user_id")->constrained()->onDelete("cascade")->onUpdate('cascade');
             $table->timestamps();
         });
     }

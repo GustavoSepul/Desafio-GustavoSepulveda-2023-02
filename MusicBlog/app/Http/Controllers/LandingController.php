@@ -29,13 +29,13 @@ class LandingController extends Controller
         ->limit(5)
         ->get();
 
-        if ($user && $user->hasRole('admin')) {
-            return view('home', compact('songs','albums','singers'));
-        } elseif ($user) {
-            return view('welcome', compact('songs','user','albums','singers','cancionesConMasLikes'));
-        } else {
-            return view('welcome', compact('songs','albums','singers','cancionesConMasLikes'));
-        }
+        // if ($user && $user->hasRole('admin')) {
+        //     return view('home', compact('songs','albums','singers'));
+        // } elseif ($user) {
+        //     return view('welcome', compact('songs','user','albums','singers','cancionesConMasLikes'));
+        // } else {
+        return view('welcome', compact('songs','user','albums','singers','cancionesConMasLikes'));
+        // }
         
     }
 
