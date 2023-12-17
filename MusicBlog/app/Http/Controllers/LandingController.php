@@ -4,15 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Song;
+use App\Models\User;
 use App\Models\Like;
 use Illuminate\Http\JsonResponse;
-
+use Illuminate\Support\Collection;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 class LandingController extends Controller
 {
     //
     public function index(){
         $songs = Song::all();
-        return view('welcome', compact("songs"));
+        $user = Auth::user();
+        
+        if ($user && $user->hasRole('admin')) {
+            return view('home', compact('songs'));
+        } elseif ($user) {
+            return view('welcome', compact('songs','user'));
+        } else {
+            return view('welcome', compact('songs'));
+        }
+        
     }
 
     public function like():JsonResponse{

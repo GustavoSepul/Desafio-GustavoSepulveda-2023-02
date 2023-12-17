@@ -2,7 +2,10 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">     
+    <div class="row justify-content-center">
+        @role('admin')
+        xd
+        @endrole
         @foreach ($songs as $item)
         <div class="col-sm-3 mt-5 mb-5">
             <div class="card h-100">
