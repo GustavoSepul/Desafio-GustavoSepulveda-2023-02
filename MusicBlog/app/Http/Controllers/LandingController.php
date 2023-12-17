@@ -45,4 +45,5 @@ class LandingController extends Controller
     function likeList(){
         return view('likeList');
     }
+    
 }
