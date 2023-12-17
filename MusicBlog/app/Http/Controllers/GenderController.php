@@ -47,8 +47,7 @@ class GenderController extends Controller
 
         $gender = Gender::create($request->all());
 
-        return redirect()->route('genders.index')
-            ->with('success', 'Gender created successfully.');
+        return redirect()->route('genders.index')->with('crear', 'ok');
     }
 
     /**
@@ -90,8 +89,7 @@ class GenderController extends Controller
 
         $gender->update($request->all());
 
-        return redirect()->route('genders.index')
-            ->with('success', 'Gender updated successfully');
+        return redirect()->route('genders.index')->with('editar', 'ok');
     }
 
     /**
@@ -103,7 +101,6 @@ class GenderController extends Controller
     {
         $gender = Gender::find($id)->delete();
 
-        return redirect()->route('genders.index')
-            ->with('success', 'Gender deleted successfully');
+        return redirect()->route('genders.index')->with('eliminar', 'ok');
     }
 }

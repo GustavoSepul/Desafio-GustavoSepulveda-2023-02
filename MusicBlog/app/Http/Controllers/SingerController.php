@@ -55,8 +55,7 @@ class SingerController extends Controller
             $singer['imagen']=$request->file('imagen')->store('uploads','public');
         }
         Singer::insert($singer);
-        return redirect()->route('singers.index')
-            ->with('success', 'Singer created successfully.');
+        return redirect()->route('singers.index')->with('crear', 'ok');
     }
 
     /**
@@ -105,8 +104,7 @@ class SingerController extends Controller
         }
         Singer::where('id','=',$id)->update($singer);
 
-        return redirect()->route('singers.index')
-            ->with('success', 'Singer updated successfully');
+        return redirect()->route('singers.index')->with('editar','ok');
     }
 
     /**
@@ -118,7 +116,6 @@ class SingerController extends Controller
     {
         $singer = Singer::find($id)->delete();
 
-        return redirect()->route('singers.index')
-            ->with('success', 'Singer deleted successfully');
+        return redirect()->route('singers.index')->with('eliminar', 'ok');
     }
 }

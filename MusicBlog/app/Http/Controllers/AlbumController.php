@@ -56,8 +56,7 @@ class AlbumController extends Controller
             $album['caratula']=$request->file('caratula')->store('uploads','public');
         }
         Album::insert($album);
-        return redirect()->route('albums.index')
-            ->with('success', 'Album created successfully.');
+        return redirect()->route('albums.index')->with('crear', 'ok');
     }
 
     /**
@@ -109,8 +108,7 @@ class AlbumController extends Controller
             unset($album['caratula']);
         }
         Album::where('id','=',$id)->update($album);
-        return redirect()->route('albums.index')
-        ->with('success', 'Album updated successfully');
+        return redirect()->route('albums.index')->with('editar', 'ok');
     }
 
     /**
@@ -122,7 +120,6 @@ class AlbumController extends Controller
     {
         $album = Album::find($id)->delete();
 
-        return redirect()->route('albums.index')
-            ->with('success', 'Album deleted successfully');
+        return redirect()->route('albums.index')->with('eliminar', 'ok');
     }
 }

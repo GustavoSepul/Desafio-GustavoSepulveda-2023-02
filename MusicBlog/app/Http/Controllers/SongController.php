@@ -92,8 +92,7 @@ class SongController extends Controller
         }
         $song->save();
         $song->singers()->attach($request->input('singers'));
-        return redirect()->route('songs.index')
-            ->with('success', 'Song created successfully.');
+        return redirect()->route('songs.index')->with('crear', 'ok');
     }
 
     /**
@@ -162,8 +161,7 @@ class SongController extends Controller
         // Sincronizar los artistas asociados
         $song->singers()->sync($request->input('singers'));
 
-        return redirect()->route('songs.index')
-            ->with('success', 'Song updated successfully');
+        return redirect()->route('songs.index')->with('editar', 'ok');
     }
 
     /**
@@ -175,7 +173,6 @@ class SongController extends Controller
     {
         $song = Song::find($id)->delete();
 
-        return redirect()->route('songs.index')
-            ->with('success', 'Song deleted successfully');
+        return redirect()->route('songs.index')->with('eliminar', 'ok');
     }
 }
