@@ -17,9 +17,11 @@
                             </span>
 
                              <div class="float-right">
+                                @role('admin')
                                 <a href="{{ route('genders.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Agregar Nuevo Género') }}
                                 </a>
+                                @endrole
                               </div>
                         </div>
                     </div>
@@ -51,10 +53,12 @@
                                             <td>
                                                 <form action="{{ route('genders.destroy',$gender->id) }}" method="POST" class="formulario-eliminar">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('genders.show',$gender->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Ver') }}</a>
+                                                    @role('admin')
                                                     <a class="btn btn-sm btn-success" href="{{ route('genders.edit',$gender->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
+                                                    @endrole
                                                 </form>
                                             </td>
                                         </tr>

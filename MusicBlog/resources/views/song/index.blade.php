@@ -17,9 +17,11 @@
                             </span>
 
                              <div class="float-right">
+                                @role('admin')
                                 <a href="{{ route('songs.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Agregar Nueva Canción') }}
                                 </a>
+                                @endrole
                               </div>
                         </div>
                     </div>
@@ -71,10 +73,12 @@
                                             <td>
                                                 <form action="{{ route('songs.destroy',$song->id) }}" method="POST" class="formulario-eliminar">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('songs.show',$song->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Ver') }}</a>
+                                                    @role('admin')
                                                     <a class="btn btn-sm btn-success" href="{{ route('songs.edit',$song->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
+                                                    @endrole
                                                 </form>
                                             </td>
                                         </tr>

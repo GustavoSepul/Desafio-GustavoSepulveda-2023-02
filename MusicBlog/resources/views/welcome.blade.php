@@ -1,6 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+}
+
+/* Ajustar la posición vertical de los controles para centrarlos */
+.carousel-control-prev,
+.carousel-control-next {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Ajustar el tamaño de los íconos de los controles */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 30px; /* Ajusta el tamaño según sea necesario */
+    height: 30px;
+    background-size: cover;
+}
+
+/* Opcional: Estilo adicional para resaltar los controles al pasar el ratón */
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+img {
+    max-height: 253.4px;
+}
+</style>
         @role('admin')
         
         @endrole
