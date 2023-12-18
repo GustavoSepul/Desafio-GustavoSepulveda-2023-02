@@ -45,7 +45,7 @@ img {
                                 @foreach ($popularChunk as $popular)
                                     <div class="col-md-3">
                                         <div class="popular card">
-                                            @if(isset($popular->caratula))
+                                            @if(isset($popular->song->caratula))
                                                 <img class="" id="vinil" src="{{ asset('storage').'/'.$popular->song->caratula }}" alt="">
                                             @else
                                                 @if(isset($popular->album_id))
