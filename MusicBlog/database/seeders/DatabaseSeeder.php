@@ -37,6 +37,24 @@ class DatabaseSeeder extends Seeder
             'pais_id' => 1,
             'imagen' => NULL
         ]);
+        DB::table('singers')->insert([
+            'nombre' => 'Linkin Park',
+            'anio_nacimiento' => 1996,
+            'pais_id' => 1,
+            'imagen' => NULL
+        ]);
+        DB::table('singers')->insert([
+            'nombre' => 'Metallica',
+            'anio_nacimiento' => 1983,
+            'pais_id' => 1,
+            'imagen' => NULL
+        ]);
+        DB::table('singers')->insert([
+            'nombre' => 'Avenged Sevenfold',
+            'anio_nacimiento' => 1999,
+            'pais_id' => 1,
+            'imagen' => NULL
+        ]);
         DB::table('genders')->insert([
             'nombre' => 'Rock',
         ]);
@@ -82,6 +100,12 @@ class DatabaseSeeder extends Seeder
             'anio' => 2005,
             'caratula' => NULL,
         ]);
+        DB::table('albums')->insert([
+            'titulo' => 'Meteora',
+            'singer_id' => 4,
+            'anio' => 2003,
+            'caratula' => NULL,
+        ]);
         DB::table('songs')->insert([
             'titulo' => 'All We Know',
             'album_id' => 1,
@@ -114,6 +138,14 @@ class DatabaseSeeder extends Seeder
             'caratula' => NULL,
             'audio' => NULL,
         ]);
+        DB::table('songs')->insert([
+            'titulo' => 'Numb',
+            'album_id' => 6,
+            'gender_id' => 1,
+            'anio' => 2003,
+            'caratula' => NULL,
+            'audio' => NULL,
+        ]);
         DB::table('singers_songs')->insert([
             'singer_id' => 2,
             'song_id' => 1,
@@ -129,6 +161,10 @@ class DatabaseSeeder extends Seeder
         DB::table('singers_songs')->insert([
             'singer_id' => 1,
             'song_id' => 4,
+        ]);
+        DB::table('singers_songs')->insert([
+            'singer_id' => 4,
+            'song_id' => 5,
         ]);
     }
 }

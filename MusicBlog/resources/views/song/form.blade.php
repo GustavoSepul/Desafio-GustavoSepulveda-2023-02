@@ -12,7 +12,7 @@
             {!! $errors->first('album_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('gender_id') }}
+            {{ Form::label('Género') }}
             {{ Form::select('gender_id', $generos, $song->gender_id, ['class' => 'form-control' . ($errors->has('gender_id') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un Género']) }}
             {!! $errors->first('gender_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>

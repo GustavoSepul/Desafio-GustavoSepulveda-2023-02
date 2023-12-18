@@ -7,8 +7,8 @@
 @section('content')
     <section class="content container-fluid">
         <div class="row m-0 p-4">
-            <div class="col-12 text-center">
-                <span style="font-size: 30px;">Detalles del Álbum</span>
+            <div class="col-12 text-center text-white">
+                <span style="font-size: 30px;" >Detalles del Álbum</span>
             </div>   
         </div>
 

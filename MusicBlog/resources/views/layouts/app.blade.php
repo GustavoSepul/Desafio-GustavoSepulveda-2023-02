@@ -36,7 +36,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-black shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     MusicBlog
@@ -155,6 +155,14 @@ footer {
     padding: 10px;
     text-align: center;
 }
+.a:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35) !important;
+}
+body{
+    background-color: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(255,255,255,1) 50%);
+}
   td {
     vertical-align: middle !important;
   }
@@ -181,7 +189,14 @@ to {-webkit-transform: rotate(360deg);}}
     -webkit-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
 }
-
+#reproductor-audio {
+            width: 300px;
+            margin: 20px;
+            background-color: black;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+        }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </html>

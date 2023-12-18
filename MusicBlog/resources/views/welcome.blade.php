@@ -30,13 +30,16 @@
 img {
     max-height: 253.4px;
 }
+.songs {
+    cursor: pointer;
+}
 </style>
         @role('admin')
         
         @endrole
         <!-- {{$cancionesConMasLikes}} -->
         <div class="container">
-            <h1>Populares</h1>
+            <h1 class="text-white">Populares</h1>
             <div id="popularCarousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     @foreach ($cancionesConMasLikes->chunk(4) as $key => $popularChunk)
@@ -44,7 +47,7 @@ img {
                             <div class="row">
                                 @foreach ($popularChunk as $popular)
                                     <div class="col-md-3">
-                                        <div class="popular card">
+                                        <div class="popular card animate__animated animate__fadeInRightBig">
                                             @if(isset($popular->song->caratula))
                                                 <img class="" id="vinil" src="{{ asset('storage').'/'.$popular->song->caratula }}" alt="">
                                             @else
@@ -95,7 +98,7 @@ img {
             </div>
         </div>
         <div class="container mt-5">
-            <h1>Canciones</h1>
+            <h1 class="text-white">Canciones</h1>
             <div id="songCarousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     @foreach ($songs->chunk(4) as $key => $songChunk)
