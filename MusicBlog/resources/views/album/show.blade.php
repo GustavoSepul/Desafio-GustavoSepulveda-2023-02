@@ -45,20 +45,22 @@
                             Canciones:
                             </strong>  
                         </p>   
-                        
-                        @foreach ($songs as $song)
-                        <p class="lead">
-                            <strong>
-                            {{ $loop->index + 1 }}. <a class="text-black" href="{{ route('songs.show',$song->id) }}">{{ $song->titulo}}</a>
-                            <!-- @if(isset($song->audio))
-                            <audio controls>
-                            <source src="{{ Storage::url($song->audio) }}" type="audio/mp3">
-                            </audio>
-                            @endif -->
-                            </strong>  
-                        </p>   
-                        
-                        @endforeach
+                        <div id="reproductor-audio" class="text-white">
+                        <audio controls id="audio-player">
+                            <source src="{{ Storage::url($songs[0]->audio) }}" type="audio/mp3">
+                            Tu navegador no soporta el elemento de audio.
+                        </audio>
+
+                        <ul id="playlist">
+                            @foreach ($songs as $song)
+                                <li data-src="{{ Storage::url($song->audio) }}"><a class="text-white" href="{{ route('songs.show',$song->id) }}">{{ $song->titulo}}</a></li>
+                            @endforeach
+                        </ul>
+
+                        <button id="play-pause">Play/Pause</button>
+                        <button id="prev">Anterior</button>
+                        <button id="next">Siguiente</button>
+                    </div>
                             <hr>
                             <a class="btn btn-secondary" href="javascript:history.back()">Regresar</a>
                         </a>
@@ -67,4 +69,64 @@
             </div>
         </div>
     </section>
+    <style>
+                #reproductor-audio {
+            width: 300px;
+            margin: 20px;
+            background-color: black;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            
+        }
+        #audio-player {
+    max-width: 250px; /* Ajusta el ancho según tus necesidades */
+}
+
+    </style>
+            <script>
+        const audioPlayer = document.getElementById('audio-player');
+        const playlist = document.getElementById('playlist');
+        const playlistItems = playlist.getElementsByTagName('li');
+        const playPauseButton = document.getElementById('play-pause');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+
+        let currentSongIndex = 0;
+
+        function playPause() {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+            } else {
+                audioPlayer.pause();
+            }
+        }
+
+        function playNext() {
+            currentSongIndex = (currentSongIndex + 1) % playlistItems.length;
+            loadSongAndPlay();
+        }
+
+        function playPrev() {
+            currentSongIndex = (currentSongIndex - 1 + playlistItems.length) % playlistItems.length;
+            loadSongAndPlay();
+        }
+
+        function loadSongAndPlay() {
+            const songSrc = playlistItems[currentSongIndex].getAttribute('data-src');
+            audioPlayer.src = songSrc;
+            audioPlayer.play();
+        }
+
+        playPauseButton.addEventListener('click', playPause);
+        nextButton.addEventListener('click', playNext);
+        prevButton.addEventListener('click', playPrev);
+
+        for (let i = 0; i < playlistItems.length; i++) {
+            playlistItems[i].addEventListener('click', function () {
+                currentSongIndex = i;
+                loadSongAndPlay();
+            });
+        }
+    </script>
 @endsection
